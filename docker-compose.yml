@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+
+  front-nginx:
+    container_name: front-nginx
+    build: nginx/
+    ports: 
+      - "8888:80"
+    volumes:
+      - ./nginx/log:/var/log/nginx
+    networks:
+      default:
+      backend:
+       
+  back-nginx:
+    container_name: back-nginx
+    build: nginx-php/
+    networks:
+      backend:
+
+networks:
+  backend:
+    internal: true
